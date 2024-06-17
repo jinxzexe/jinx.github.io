@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Checker</title>
+    <link rel="icon" href="tr.ico" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('tr.gif');
+            background-size: cover;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+        textarea {
+            width: 70%;
+            height: 150px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            resize: vertical;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+        .live {
+            color: green;
+        }
+        .declined {
+            color: red;
+        }
+        .advertisement {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .advertisement img {
+            max-width: 100%;
+            height: auto;
+        }
+        .created-by {
+            text-align: center;
+            color: rgb(3, 3, 3);
+            font-size: 24px;
+            margin-top: 30px;
+            font-weight: bold;
+            font-style: italic;
+            text-shadow: 2px 2px 4px rgba(4, 4, 4, 0.5);
+        }
+        .telegram-link {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        .telegram-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <body>
+        <div class="container">
+            <h1>
+                <img width="400" alt="QCHEcKER" src="boldkid.gif">
+            </h1>
+            <center><div class="form-group">
+                <label for="cardNumbers">Credit Card Numbers (one per line)</label>
+                <textarea placeholder="6969***********|06|29|420" rows="5" id="cardNumbers"></textarea>
+            </div>
+            <button id="check-btn">CHECK</button>
+            <div id="results"></div></center>
+    
+            <div class="advertisement">
+                <a href="">
+                    <img alt="Advertisement" src="ddz.jpg">
+                </a>
+            </div>
+            <div class="advertisement">
+                <a href="">
+                    <img alt="Advertisement" src="ddz.jpg">
+                </a>
+            </div>
+    
+            
+    
+            <div class="created-by">Quantum</div>
+            <div class="telegram-link">
+                <a href="https://discord.gg/cyJMUQVFyX">DISCORD</a>
+            </div>
+    
+            <script>
+const cardNumberInput = document.getElementById('cardNumbers');
+const checkBtn = document.getElementById('check-btn');
+const resultsDiv = document.getElementById('results');
+
+checkBtn.addEventListener('click', () => {
+  const cardNumbers = cardNumberInput.value.trim().split('\n');
+  const results = [];
+
+  cardNumbers.forEach((cardNumber) => {
+    const cardNumberParts = cardNumber.split('|');
+    const number = cardNumberParts[0].trim();
+    const expirationMonth = cardNumberParts[1].trim();
+    const expirationYear = cardNumberParts[2].trim();
+    const cvv = cardNumberParts[3].trim();
+
+    let isValid = Math.random() < 0.5; // 50% chance of being valid or invalid
+
+    let resultText = `${number}  ${isValid? 'valid' : 'invalid'}`;
+    let resultColor = isValid? 'lime' : 'red';
+
+    results.push(`<span style="color: ${resultColor}">${resultText}</span>`);
+  });
+
+  resultsDiv.innerHTML = results.join('<br>');
+});
+
+
+            </script>
+        </div>
+    </body>
+    </html>
